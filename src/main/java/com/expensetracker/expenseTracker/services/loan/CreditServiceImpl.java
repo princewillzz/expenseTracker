@@ -4,9 +4,12 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import com.expensetracker.expenseTracker.exceptions.InvalidAlgorithmException;
 import com.expensetracker.expenseTracker.models.Credit;
+import com.expensetracker.expenseTracker.models.RepaymentAlgo;
 import com.expensetracker.expenseTracker.repository.CreditRepo;
 
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -61,6 +64,23 @@ public class CreditServiceImpl implements CreditService {
         
     }
 
+    @Override
+    public List<Credit> repaymentListWithAlgo(final String repaymentAlgo) throws InvalidAlgorithmException {
+        
+        if(repaymentAlgo.compareToIgnoreCase(RepaymentAlgo.FIRST_IN_FIRST_OUT.toString()) == 0) {
+            return getCreditsBasedOnLatestRepaymentDate();
+        } else {
+            throw new InvalidAlgorithmException("Unsupported Algorithm!!");
+        }
+        
+    }
+
+    // Show payments based on latest repayment date
+    private List<Credit> getCreditsBasedOnLatestRepaymentDate() {
+        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+
+        return creditRepo.findByIsRepaymentDone(false, sort);
+    }
     
 
 }

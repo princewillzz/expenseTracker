@@ -9,7 +9,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.Type;
+import org.hibernate.annotations.UpdateTimestamp;
 
 import lombok.Data;
 
@@ -32,5 +34,14 @@ public class Credit {
 
     @Column(columnDefinition = "TEXT")
     private String note;
+
+    @Column(columnDefinition = "boolean default false")
+    private boolean isRepaymentDone;
+
+    @CreationTimestamp
+    private Date createdAt;
+
+    @UpdateTimestamp
+    private Date updatedAt;
 
 }

@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.UUID;
 
+import com.expensetracker.expenseTracker.exceptions.InvalidAlgorithmException;
 import com.expensetracker.expenseTracker.models.Credit;
 
 public interface CreditService {
@@ -18,5 +19,5 @@ public interface CreditService {
 
     void deleteCredit(UUID creditId) throws IllegalArgumentException, NoSuchElementException;
     
-    
+    List<Credit> repaymentListWithAlgo(String repaymentAlgo) throws InvalidAlgorithmException;
 }

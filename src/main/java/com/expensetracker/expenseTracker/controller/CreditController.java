@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
@@ -58,6 +59,13 @@ public class CreditController {
     @PutMapping("/{id}")
     public ResponseEntity<Credit> updateCreditInfo(@PathVariable(name = "id") final UUID creditId, @Valid @RequestBody final Credit creditDetail) {
         return ResponseEntity.ok().body(creditService.updateCredit(creditId, creditDetail));
+    }
+
+    @GetMapping("/repayment")
+    public ResponseEntity<List<Credit>> getRepaymentToBeMadeBasedOnAlgo(@RequestParam(name = "algo") final String repaymentAlgo) {
+
+
+        return ResponseEntity.ok().body(creditService.repaymentListWithAlgo(repaymentAlgo));
     }
 
 
