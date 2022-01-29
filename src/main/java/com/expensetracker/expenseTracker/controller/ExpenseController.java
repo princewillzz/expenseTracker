@@ -23,7 +23,7 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping(value = "/api/expense")
-public class ExpenseRecorderController {
+public class ExpenseController {
 
     private final ExpenseService expenseService;
 

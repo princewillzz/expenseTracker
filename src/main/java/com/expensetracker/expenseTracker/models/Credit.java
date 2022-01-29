@@ -16,7 +16,7 @@ import lombok.Data;
 
 @Data
 @Entity
-public class Loan {
+public class Credit {
     
     @Id
     @GeneratedValue

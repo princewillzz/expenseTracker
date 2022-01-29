@@ -26,12 +26,14 @@ public class ExpenseServiceImpl implements ExpenseService {
     }
 
     @Override
+    @Transactional(readOnly = true)
     public Expense getExpense(final UUID expenseId) throws NoSuchElementException {
         
         return expenseRepo.findById(expenseId).orElseThrow();
     }
 
     @Override
+    @Transactional(readOnly = true)
     public List<Expense> getAllExpenses() {
         return expenseRepo.findAll();
     }
