@@ -68,5 +68,10 @@ public class CreditController {
         return ResponseEntity.ok().body(creditService.repaymentListWithAlgo(repaymentAlgo));
     }
 
+    @PutMapping("/repayment/make-payment/{id}")
+    public ResponseEntity<Credit> fullFillPaymentForCredit(@PathVariable(name = "id") final UUID creditId) {
+        return ResponseEntity.ok().body(creditService.clearCreditDue(creditId));
+    }
+
 
 }

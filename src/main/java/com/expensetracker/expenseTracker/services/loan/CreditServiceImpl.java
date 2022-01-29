@@ -82,6 +82,14 @@ public class CreditServiceImpl implements CreditService {
 
         return creditRepo.findByIsRepaymentDone(false, sort);
     }
+
+    @Override
+    @Transactional
+    public Credit clearCreditDue(UUID creditId) throws NoSuchElementException {
+        final Credit credit = creditRepo.findById(creditId).orElseThrow();
+        credit.setRepaymentDone(true);
+        return creditRepo.save(credit);
+    }
     
 
 }

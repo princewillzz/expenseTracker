@@ -19,29 +19,27 @@ import org.springframework.web.method.annotation.MethodArgumentTypeMismatchExcep
 @RestControllerAdvice
 public class ValidationExceptionHandler {
 
-    @ResponseStatus(HttpStatus.BAD_REQUEST)
-    @ExceptionHandler(MethodArgumentNotValidException.class)
-    public Map<String, String> handleValidationExceptions(
-    MethodArgumentNotValidException ex) {
-        Map<String, String> errors = new HashMap<>();
-        ex.getBindingResult().getAllErrors().forEach((error) -> {
-            String fieldName = ((FieldError) error).getField();
-            String errorMessage = error.getDefaultMessage();
-            errors.put(fieldName, errorMessage);
-        });
-        return errors;
-    }
+  @ResponseStatus(HttpStatus.BAD_REQUEST)
+  @ExceptionHandler(MethodArgumentNotValidException.class)
+  public Map<String, String> handleValidationExceptions(
+      MethodArgumentNotValidException ex) {
+    Map<String, String> errors = new HashMap<>();
+    ex.getBindingResult().getAllErrors().forEach((error) -> {
+      String fieldName = ((FieldError) error).getField();
+      String errorMessage = error.getDefaultMessage();
+      errors.put(fieldName, errorMessage);
+    });
+    return errors;
+  }
 
-    @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
-public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
-  MethodArgumentTypeMismatchException ex, WebRequest request) {
-    String error = 
-      ex.getName() + " should be of type " + ex.getRequiredType().getName();
+  @ExceptionHandler({ MethodArgumentTypeMismatchException.class })
+  public ResponseEntity<Object> handleMethodArgumentTypeMismatch(
+      MethodArgumentTypeMismatchException ex, WebRequest request) {
+    String error = ex.getName() + " should be of type " + ex.getRequiredType().getName();
 
-    ApiError apiError = 
-      new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
+    ApiError apiError = new ApiError(HttpStatus.BAD_REQUEST, ex.getLocalizedMessage(), error);
     return new ResponseEntity<Object>(
-      apiError, new HttpHeaders(), apiError.getStatus());
-}
-    
+        apiError, new HttpHeaders(), apiError.getStatus());
+  }
+
 }

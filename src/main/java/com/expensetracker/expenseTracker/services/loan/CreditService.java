@@ -20,4 +20,6 @@ public interface CreditService {
     void deleteCredit(UUID creditId) throws IllegalArgumentException, NoSuchElementException;
     
     List<Credit> repaymentListWithAlgo(String repaymentAlgo) throws InvalidAlgorithmException;
+
+    Credit clearCreditDue(UUID creditId) throws NoSuchElementException;
 }
