@@ -2,8 +2,14 @@
 
 ## Setup the project
 
-Assumptions: I have used lombok for getter setter and toString auto-generation during compile time
+## Assumptions: 
+1. I have assumed there are two algorithms for repayments for now 
+    - first_in_first_out
+    - first_in_last_out
+2. I have used lombok for getter setter and toString auto-generation during compile time
 
+
+## SETUP: 
 1. Clone the Repo
 2. Create a Database with expense_tracker in your MySQL
 3. Change the username and password in application.yml inside the resources folder with your Mysql username and password
