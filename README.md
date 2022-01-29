@@ -22,12 +22,11 @@ Endpoints                  | Method        | Description
 api/expense | GET | Get details of all expense
 api/expense/{expense_id} | GET | Get details of an expense
 api/expense/{expense_id} | DELETE | Delete an expense
-
 api/credit/ | POST | Create a Due
 api/credit/{credit_id} | PUT | Update an existing credit details
+api/credit/{credit_id} | DELETE | Delete an existing credit
 api/credit | GET | Get all credits details
 api/credit/{id} | GET | Get a credit details
-
 /api/credit/repayment?algo=first_in_first_out | GET | Get all repayments based on an algorithm
 api/credit/repayment/make-payment/{credit_id} | PUT | make payment for a due credit
 
