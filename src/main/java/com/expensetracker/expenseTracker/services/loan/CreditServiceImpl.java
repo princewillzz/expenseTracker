@@ -68,7 +68,9 @@ public class CreditServiceImpl implements CreditService {
     public List<Credit> repaymentListWithAlgo(final String repaymentAlgo) throws InvalidAlgorithmException {
         
         if(repaymentAlgo.compareToIgnoreCase(RepaymentAlgo.FIRST_IN_FIRST_OUT.toString()) == 0) {
-            return getCreditsBasedOnLatestRepaymentDate();
+            return getCreditsBasedOnRepaymentDate(Sort.by(Sort.Direction.DESC, "createdAt"));
+        }if(repaymentAlgo.compareToIgnoreCase(RepaymentAlgo.LAST_IN_FIRST_OUT.toString()) == 0) {
+            return getCreditsBasedOnRepaymentDate(Sort.by(Sort.Direction.ASC, "createdAt"));
         } else {
             throw new InvalidAlgorithmException("Unsupported Algorithm!!");
         }
@@ -76,8 +78,7 @@ public class CreditServiceImpl implements CreditService {
     }
 
     // Show payments based on latest repayment date
-    private List<Credit> getCreditsBasedOnLatestRepaymentDate() {
-        Sort sort = Sort.by(Sort.Direction.DESC, "createdAt");
+    private List<Credit> getCreditsBasedOnRepaymentDate(final Sort sort) {
 
         return creditRepo.findByIsRepaymentDone(false, sort);
     }
